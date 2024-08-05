@@ -6,23 +6,15 @@ from streamlit_extras.stylable_container import stylable_container
 from functools import reduce
 from time import sleep
 
-if 'server' not in globals():
-    server = 'mtnatega.postgres.database.azure.com'
-    database = 'postgres'
-    username = 'natega'
-    password = 'Mt100323'
-    port = '5432'
-    sslmode = 'require'
-
 @st.cache_data()
 def data():
     conn = psycopg2.connect(
-    host=server,
-    database=database,
-    user=username,
-    password=password,
-    port=port,
-    sslmode=sslmode
+    host=st.secrets.database.server,
+    database=st.secrets.database.database,
+    user=st.secrets.database.username,
+    password=st.secrets.database.password,
+    port=st.secrets.database.port,
+    sslmode=st.secrets.database.sslmode
     )
     cur = conn.cursor()
     select_query = '''
