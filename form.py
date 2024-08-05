@@ -44,7 +44,16 @@ with col2:
     st.text_input('رقم الهاتف', key='phone', label_visibility='collapsed', placeholder="رقم الهاتف")
 with col3:
     st.selectbox('عدد المرافقين', key='add_no', options=[None, 'مرافق واحد (100 ج)', 'اتنين مرافقين (200 ج)', 'ثلاث مرافقين (300 ج)'], label_visibility='collapsed', placeholder="عدد المرافقين")
-
+with stylable_container(
+        key="Upload_Data",
+        css_styles="""
+        h2{
+        display: flex;
+            justify-content: flex-end;
+        }
+        """
+    ):
+    st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(temp['add_number'].value_counts(), start = 1))}', divider='rainbow')
 temp = df
 if st.session_state['name'] != None and st.session_state['name'] != '':
     temp = temp[temp['name'].str.startswith(st.session_state['name'])]
@@ -57,29 +66,16 @@ if st.session_state['phone'] != None and st.session_state['phone'] != '':
 if st.session_state['add_no'] != None and st.session_state['add_no'] != '':
     temp = temp[temp['add_number'] == st.session_state['add_no']]
 
-col1, col2 = st.columns([1,1],vertical_alignment='center')
-with col1:
-    with stylable_container(
-        key="Upload_Data",
-        css_styles="""
-        h2{
-        display: flex;
-            justify-content: flex-end;
-        }
-        """
-    ):
-        st.header(f'عدد الطلاب المسجلين: {temp.shape[0]}', divider='rainbow')
-with col2:
-    with stylable_container(
-        key="Upload_Data",
-        css_styles="""
-        h2{
-        display: flex;
-            justify-content: flex-end;
-        }
-        """
-    ):
-        st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(temp['add_number'].value_counts(), start = 1))}', divider='rainbow')
+with stylable_container(
+    key="Upload_Data",
+    css_styles="""
+    h2{
+    display: flex;
+        justify-content: flex-end;
+    }
+    """
+):
+    st.header(f'عدد الطلاب المسجلين: {temp.shape[0]}', divider='rainbow')
 
 with st.container(border=True):
     for i, j in temp.iterrows():
