@@ -91,7 +91,7 @@ for i, j in temp.iterrows():
         }
         """
     ):
-        with st.expander(f'{i+1}- بيانات الطالب', icon='🎓'):
+        with st.expander(f'بيانات الطالب -{i+1}', icon='🎓'):
             col1, col2 = st.columns([1,1],vertical_alignment='center')
             with col1:
                 with stylable_container(
