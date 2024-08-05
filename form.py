@@ -82,7 +82,7 @@ with col2:
         st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(temp['add_number'].value_counts(), start = 1))}', divider='rainbow')
 
 with st.container(border=True):
-        for i, j in temp.iterrows():
+    for i, j in temp.iterrows():
         with stylable_container(
             key="Upload_Data",
             css_styles="""
