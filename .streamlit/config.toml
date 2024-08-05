@@ -2,3 +2,10 @@
 showErrorDetails = false
 [server]
 maxUploadSize = 5
+[database]
+server = 'mtnatega.postgres.database.azure.com'
+database = 'postgres'
+username = 'natega'
+password = 'Mt100323'
+port = '5432'
+sslmode = 'require'
