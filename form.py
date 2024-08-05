@@ -4,6 +4,7 @@ import numpy as np
 import psycopg2
 from streamlit_extras.stylable_container import stylable_container
 from functools import reduce
+from time import sleep
 
 if 'server' not in globals():
     server = 'mtnatega.postgres.database.azure.com'
@@ -79,6 +80,7 @@ if st.session_state['phone'] != None and st.session_state['phone'] != '':
 if st.session_state['add_no'] != None and st.session_state['add_no'] != '':
     temp = temp[temp['add_number'] == st.session_state['add_no']]
 
+st.container(border=True)
 for i, j in temp.iterrows():
     with stylable_container(
         key="Upload_Data",
@@ -128,3 +130,4 @@ for i, j in temp.iterrows():
                 st.write(f'رقم الهاتف: {j['phone']}')
                 st.write(f'رقم العملية: {j['pay_no']}')
                 st.write(f'عدد المرافقين : {j['add_number']}')
+    sleep(0.5)
