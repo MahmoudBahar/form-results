@@ -26,6 +26,7 @@ def data():
     cur = conn.cursor()
     select_query = '''
         SELECT * FROM form
+        LIMIT 1
         '''
     cur.execute(select_query)
     df = pd.DataFrame(cur.fetchall(), columns= [i[0]for i in cur.description])
@@ -78,7 +79,7 @@ if st.session_state['phone'] != None and st.session_state['phone'] != '':
     temp = temp[temp['phone'].str.contains(st.session_state['phone'])]
 if st.session_state['add_no'] != None and st.session_state['add_no'] != '':
     temp = temp[temp['add_number'] == st.session_state['add_no']]
-with st.container(border=True):
+with st.container(border=True, height=1000):
     for i, j in temp.iterrows():
         col1, col2 = st.columns([1,1],vertical_alignment='center')
         with col1:
