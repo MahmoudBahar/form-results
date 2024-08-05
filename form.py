@@ -32,29 +32,6 @@ def data():
     df = pd.DataFrame(cur.fetchall(), columns= [i[0]for i in cur.description])
     return df['id_image'].apply(lambda x: x.tobytes()), df['pay_image'].apply(lambda x: x.tobytes()), df.drop(['id_image', 'pay_image', 'no'], axis = 1)
 id_images, pay_images, df = data()
-col1, col2 = st.columns([1,1],vertical_alignment='center')
-with col1:
-    with stylable_container(
-        key="Upload_Data",
-        css_styles="""
-        h2{
-        display: flex;
-            justify-content: flex-end;
-        }
-        """
-    ):
-        st.header(f'عدد الطلاب المسجلين: {df.shape[0]}', divider='rainbow')
-with col2:
-    with stylable_container(
-        key="Upload_Data",
-        css_styles="""
-        h2{
-        display: flex;
-            justify-content: flex-end;
-        }
-        """
-    ):
-        st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(df['add_number'].value_counts(), start = 1))}', divider='rainbow')
 col1, col2 = st.columns([1, 1])
 with col1:
     st.text_input('الاسم بالعربي رباعي', key='name', label_visibility='collapsed', placeholder="الاسم بالعربي رباعي")
@@ -79,6 +56,30 @@ if st.session_state['phone'] != None and st.session_state['phone'] != '':
     temp = temp[temp['phone'].str.contains(st.session_state['phone'])]
 if st.session_state['add_no'] != None and st.session_state['add_no'] != '':
     temp = temp[temp['add_number'] == st.session_state['add_no']]
+
+col1, col2 = st.columns([1,1],vertical_alignment='center')
+with col1:
+    with stylable_container(
+        key="Upload_Data",
+        css_styles="""
+        h2{
+        display: flex;
+            justify-content: flex-end;
+        }
+        """
+    ):
+        st.header(f'عدد الطلاب المسجلين: {temp.shape[0]}', divider='rainbow')
+with col2:
+    with stylable_container(
+        key="Upload_Data",
+        css_styles="""
+        h2{
+        display: flex;
+            justify-content: flex-end;
+        }
+        """
+    ):
+        st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(temp['add_number'].value_counts(), start = 1))}', divider='rainbow')
 
 st.container(border=True)
 for i, j in temp.iterrows():
