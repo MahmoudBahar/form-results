@@ -130,4 +130,4 @@ for i, j in temp.iterrows():
                 st.write(f'رقم الهاتف: {j['phone']}')
                 st.write(f'رقم العملية: {j['pay_no']}')
                 st.write(f'عدد المرافقين : {j['add_number']}')
-    sleep(0.5)
+    sleep(0.8)
