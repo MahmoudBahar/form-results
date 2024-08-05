@@ -26,7 +26,6 @@ def data():
     cur = conn.cursor()
     select_query = '''
         SELECT * FROM form
-        LIMIT 1
         '''
     cur.execute(select_query)
     df = pd.DataFrame(cur.fetchall(), columns= [i[0]for i in cur.description])
