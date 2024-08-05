@@ -81,54 +81,54 @@ with col2:
     ):
         st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(temp['add_number'].value_counts(), start = 1))}', divider='rainbow')
 
-st.container(border=True)
-for i, j in temp.iterrows():
-    with stylable_container(
-        key="Upload_Data",
-        css_styles="""
-        span{
-        display: flex;
-            justify-content: flex-end;
-        }
-        """
-    ):
-        with st.expander(f'بيانات الطالب -{i+1}', icon='🎓'):
-            col1, col2 = st.columns([1,1],vertical_alignment='center')
-            with col1:
+with st.container(border=True):
+        for i, j in temp.iterrows():
+        with stylable_container(
+            key="Upload_Data",
+            css_styles="""
+            span{
+            display: flex;
+                justify-content: flex-end;
+            }
+            """
+        ):
+            with st.expander(f'بيانات الطالب -{i+1}', icon='🎓'):
+                col1, col2 = st.columns([1,1],vertical_alignment='center')
+                with col1:
+                    with stylable_container(
+                        key="Upload_Data",
+                        css_styles="""
+                        h2{
+                        display: flex;
+                            justify-content: flex-end;
+                        }
+                        """
+                    ):
+                        st.image(id_images[i], caption='صورة البطاقة')
+                with col2:
+                    with stylable_container(
+                        key="Upload_Data",
+                        css_styles="""
+                        h2{
+                        display: flex;
+                            justify-content: flex-end;
+                        }
+                        """
+                    ):
+                        st.image(pay_images[i], caption='صورة عملية الدفع')
                 with stylable_container(
                     key="Upload_Data",
                     css_styles="""
-                    h2{
-                    display: flex;
+                    p{
+                        display: flex;
                         justify-content: flex-end;
                     }
                     """
                 ):
-                    st.image(id_images[i], caption='صورة البطاقة')
-            with col2:
-                with stylable_container(
-                    key="Upload_Data",
-                    css_styles="""
-                    h2{
-                    display: flex;
-                        justify-content: flex-end;
-                    }
-                    """
-                ):
-                    st.image(pay_images[i], caption='صورة عملية الدفع')
-            with stylable_container(
-                key="Upload_Data",
-                css_styles="""
-                p{
-                    display: flex;
-                    justify-content: flex-end;
-                }
-                """
-            ):
-                st.write(f'الاسم: {j['name']}')
-                st.write(f'القسم: {j['dep']}')
-                st.write(f'الرقم القومي: {j['id']}')
-                st.write(f'رقم الهاتف: {j['phone']}')
-                st.write(f'رقم العملية: {j['pay_no']}')
-                st.write(f'عدد المرافقين : {j['add_number']}')
-    sleep(0.5)
+                    st.write(f'الاسم: {j['name']}')
+                    st.write(f'القسم: {j['dep']}')
+                    st.write(f'الرقم القومي: {j['id']}')
+                    st.write(f'رقم الهاتف: {j['phone']}')
+                    st.write(f'رقم العملية: {j['pay_no']}')
+                    st.write(f'عدد المرافقين : {j['add_number']}')
+        sleep(0.5)
