@@ -78,53 +78,53 @@ if st.session_state['phone'] != None and st.session_state['phone'] != '':
     temp = temp[temp['phone'].str.contains(st.session_state['phone'])]
 if st.session_state['add_no'] != None and st.session_state['add_no'] != '':
     temp = temp[temp['add_number'] == st.session_state['add_no']]
-
-for i, j in temp.iterrows():
-    col1, col2 = st.columns([1,1],vertical_alignment='center')
-    with col1:
-        with stylable_container(
-            key="Upload_Data",
-            css_styles="""
-            h2{
-            display: flex;
-                justify-content: flex-end;
-            }
-            """
-        ):
-            st.image(id_images[i], caption='صورة البطاقة')
-    with col2:
-        with stylable_container(
-            key="Upload_Data",
-            css_styles="""
-            h2{
-            display: flex;
-                justify-content: flex-end;
-            }
-            """
-        ):
-            st.image(pay_images[i], caption='صورة عملية الدفع')
-    with stylable_container(
-        key="Upload_Data",
-        css_styles="""
-        span{
-        display: flex;
-            justify-content: flex-end;
-        }
-        """
-    ):
-        with st.expander(f'{i+1}- بيانات الطالب', icon='🎓'):
+with st.container(border=True):
+    for i, j in temp.iterrows():
+        col1, col2 = st.columns([1,1],vertical_alignment='center')
+        with col1:
             with stylable_container(
                 key="Upload_Data",
                 css_styles="""
-                p{
-                    display: flex;
+                h2{
+                display: flex;
                     justify-content: flex-end;
                 }
                 """
             ):
-                st.write(f'الاسم: {j['name']}')
-                st.write(f'القسم: {j['dep']}')
-                st.write(f'الرقم القومي: {j['id']}')
-                st.write(f'رقم الهاتف: {j['phone']}')
-                st.write(f'رقم العملية: {j['pay_no']}')
-                st.write(f'عدد المرافقين : {j['add_number']}')
+                st.image(id_images[i], caption='صورة البطاقة')
+        with col2:
+            with stylable_container(
+                key="Upload_Data",
+                css_styles="""
+                h2{
+                display: flex;
+                    justify-content: flex-end;
+                }
+                """
+            ):
+                st.image(pay_images[i], caption='صورة عملية الدفع')
+        with stylable_container(
+            key="Upload_Data",
+            css_styles="""
+            span{
+            display: flex;
+                justify-content: flex-end;
+            }
+            """
+        ):
+            with st.expander(f'{i+1}- بيانات الطالب', icon='🎓'):
+                with stylable_container(
+                    key="Upload_Data",
+                    css_styles="""
+                    p{
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+                    """
+                ):
+                    st.write(f'الاسم: {j['name']}')
+                    st.write(f'القسم: {j['dep']}')
+                    st.write(f'الرقم القومي: {j['id']}')
+                    st.write(f'رقم الهاتف: {j['phone']}')
+                    st.write(f'رقم العملية: {j['pay_no']}')
+                    st.write(f'عدد المرافقين : {j['add_number']}')
