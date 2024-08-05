@@ -53,7 +53,7 @@ with stylable_container(
         }
         """
     ):
-    st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(temp['add_number'].value_counts(), start = 1))}', divider='rainbow')
+    st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(df['add_number'].value_counts(), start = 1))}', divider='rainbow')
 temp = df
 if st.session_state['name'] != None and st.session_state['name'] != '':
     temp = temp[temp['name'].str.startswith(st.session_state['name'])]
