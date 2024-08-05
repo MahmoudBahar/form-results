@@ -32,6 +32,16 @@ def data():
     df = pd.DataFrame(cur.fetchall(), columns= [i[0]for i in cur.description])
     return df['id_image'].apply(lambda x: x.tobytes()), df['pay_image'].apply(lambda x: x.tobytes()), df.drop(['id_image', 'pay_image', 'no'], axis = 1)
 id_images, pay_images, df = data()
+with stylable_container(
+        key="Upload_Data",
+        css_styles="""
+        h2{
+        display: flex;
+            justify-content: center;
+        }
+        """
+    ):
+    st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(df['add_number'].value_counts(), start = 1))}', divider='rainbow')
 col1, col2 = st.columns([1, 1])
 with col1:
     st.text_input('الاسم بالعربي رباعي', key='name', label_visibility='collapsed', placeholder="الاسم بالعربي رباعي")
@@ -44,16 +54,7 @@ with col2:
     st.text_input('رقم الهاتف', key='phone', label_visibility='collapsed', placeholder="رقم الهاتف")
 with col3:
     st.selectbox('عدد المرافقين', key='add_no', options=[None, 'مرافق واحد (100 ج)', 'اتنين مرافقين (200 ج)', 'ثلاث مرافقين (300 ج)'], label_visibility='collapsed', placeholder="عدد المرافقين")
-with stylable_container(
-        key="Upload_Data",
-        css_styles="""
-        h2{
-        display: flex;
-            justify-content: flex-end;
-        }
-        """
-    ):
-    st.header(f'عدد المرافقين المسجلين: {sum(i*j for i, j in enumerate(df['add_number'].value_counts(), start = 1))}', divider='rainbow')
+
 temp = df
 if st.session_state['name'] != None and st.session_state['name'] != '':
     temp = temp[temp['name'].str.startswith(st.session_state['name'])]
@@ -71,7 +72,7 @@ with stylable_container(
     css_styles="""
     h2{
     display: flex;
-        justify-content: flex-end;
+        justify-content: center;
     }
     """
 ):
