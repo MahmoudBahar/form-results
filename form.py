@@ -23,6 +23,14 @@ def data():
     cur.execute(select_query)
     df = pd.DataFrame(cur.fetchall(), columns= [i[0]for i in cur.description])
     return df['id_image'].apply(lambda x: x.tobytes()), df['pay_image'].apply(lambda x: x.tobytes()), df.drop(['id_image', 'pay_image', 'no'], axis = 1)
+st.markdown("""
+    <style>
+    div.stButton > button:first-child {
+        background-color: red;
+        color: white
+    }
+    </style>""", unsafe_allow_html=True)
+st.button("إعادة تحميل", use_container_width=True, on_click=data.clear)
 id_images, pay_images, df = data()
 with stylable_container(
         key="Upload_Data",
